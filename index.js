@@ -24,6 +24,10 @@ function add(){
     //Create amount cell for table and append it to row
     let amountCell = document.createElement("td");
     amountCell.innerHTML = amount;
+    let deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = "X"
+    amountCell.appendChild(deleteBtn);
+
     row.appendChild(amountCell);
 
     //Append new row with date to table
