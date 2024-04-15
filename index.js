@@ -40,4 +40,7 @@ function remove(name){
 
     let row = document.querySelector(`.${name}`)
     console.log(row)
+    let table = document.querySelector("#table");
+
+    table.removeChild(row);
 }
