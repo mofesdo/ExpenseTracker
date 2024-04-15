@@ -27,7 +27,7 @@ function add(){
     amountCell.innerHTML = amount;
     let deleteBtn = document.createElement("button");
     deleteBtn.innerHTML = "X"
-    deleteBtn.addEventListener("click", remove)
+    deleteBtn.addEventListener("click",function(){ remove(name); })
     amountCell.appendChild(deleteBtn);
 
     row.appendChild(amountCell);
@@ -36,8 +36,8 @@ function add(){
     table.appendChild(row);
 }
 
-function remove(){
+function remove(name){
 
-    let row = document.querySelector(`.${document.querySelector("#name").value}`)
+    let row = document.querySelector(`.${name}`)
     console.log(row)
 }
