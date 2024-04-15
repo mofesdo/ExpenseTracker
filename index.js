@@ -10,6 +10,7 @@ function add(){
     //Get table and create row element
     let table = document.querySelector("#table");
     let row = document.createElement("tr");
+    row.classList.add(name);
 
     //Create name cell for table and append it to row
     let nameCell = document.createElement("td");
@@ -26,11 +27,17 @@ function add(){
     amountCell.innerHTML = amount;
     let deleteBtn = document.createElement("button");
     deleteBtn.innerHTML = "X"
+    deleteBtn.addEventListener("click", remove)
     amountCell.appendChild(deleteBtn);
 
     row.appendChild(amountCell);
 
     //Append new row with date to table
     table.appendChild(row);
+}
 
+function remove(){
+
+    let row = document.querySelector(`.${document.querySelector("#name").value}`)
+    console.log(row)
 }
