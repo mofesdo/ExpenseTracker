@@ -1,22 +1,31 @@
-//load();
-
-console.log(localStorage.getItem("expenses"))
+load();
 
 function load(){
     console.log("loading table...")
+    let table = document.querySelector("#table");
+    let expenses = JSON.parse(localStorage.getItem("expenses"));
+    let name = "name"
+    for(let i = 0; i < expenses.length; i++){
+        name = expenses[i].name;
+        console.log(expenses[i])
+        console.log(expenses[i].name)
+        table.innerHTML += `<tr class = ${name}><td>` + expenses[i].name + "</td><td>" + expenses[i].date + "</td><td>" + expenses[i].amount + `<button onclick="remove('${name}')">X</button></td></tr>`
+    }
+
 }
 
 function add(){
     console.log("adding new expense")
+    //Get expenses from local storage
     let expenses = JSON.parse(localStorage.getItem("expenses"));
 
     let name = document.querySelector("#name").value;
     let date = document.querySelector("#date").value;
     let amount = document.querySelector("#amount").value;
+
+    //Create expense and push it onto the local storage
     let expense = {name, date, amount};
-    console.log(expense)
     expenses.push(expense);
-    console.log(expenses);
     localStorage.setItem("expenses", JSON.stringify(expenses));
 
     //Get table and create row element
@@ -41,7 +50,6 @@ function add(){
     deleteBtn.innerHTML = "X"
     deleteBtn.addEventListener("click",function(){ remove(name); })
     amountCell.appendChild(deleteBtn);
-
     row.appendChild(amountCell);
 
     //Append new row with date to table
