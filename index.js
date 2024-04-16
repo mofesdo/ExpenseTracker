@@ -4,14 +4,12 @@ function load(){
     console.log("loading table...")
     let table = document.querySelector("#table");
     let expenses = JSON.parse(localStorage.getItem("expenses"));
-    let name = "name"
+    let name = "name";
+    //For each element in array of expenses, add a row to the table html
     for(let i = 0; i < expenses.length; i++){
         name = expenses[i].name;
-        console.log(expenses[i])
-        console.log(expenses[i].name)
-        table.innerHTML += `<tr class = ${name}><td>` + expenses[i].name + "</td><td>" + expenses[i].date + "</td><td>" + expenses[i].amount + `<button onclick="remove('${name}')">X</button></td></tr>`
+        table.innerHTML += `<tbody class = ${name}>` + `<tr><td>` + expenses[i].name + "</td><td>" + expenses[i].date + "</td><td>" + expenses[i].amount + `<button onclick="remove('${name}')">X</button></td></tr>` + "</tbody>"
     }
-
 }
 
 function add(){
@@ -57,10 +55,21 @@ function add(){
 }
 
 function remove(name){
-
     let row = document.querySelector(`.${name}`)
-    console.log(row)
-    let table = document.querySelector("#table");
 
+    //Delete table row in html
+    let table = document.querySelector("#table");
     table.removeChild(row);
+
+    //Delete expense from local storage
+    let expenses = JSON.parse(localStorage.getItem("expenses"));
+    let index = "";
+    //Find index of expense we want deleted
+    for(let i = 0; i < expenses.length; i++){
+        if(expenses[i].name == name){
+            index = i;
+        }
+    } 
+    expenses.splice(index, 1);
+    localStorage.setItem("expenses", JSON.stringify(expenses));
 }
