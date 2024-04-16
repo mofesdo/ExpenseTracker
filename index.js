@@ -1,11 +1,23 @@
+//load();
 
-//document.querySelector("#addButton").addEventListener("click", add);
+console.log(localStorage.getItem("expenses"))
+
+function load(){
+    console.log("loading table...")
+}
 
 function add(){
     console.log("adding new expense")
+    let expenses = JSON.parse(localStorage.getItem("expenses"));
+
     let name = document.querySelector("#name").value;
     let date = document.querySelector("#date").value;
     let amount = document.querySelector("#amount").value;
+    let expense = {name, date, amount};
+    console.log(expense)
+    expenses.push(expense);
+    console.log(expenses);
+    localStorage.setItem("expenses", JSON.stringify(expenses));
 
     //Get table and create row element
     let table = document.querySelector("#table");
